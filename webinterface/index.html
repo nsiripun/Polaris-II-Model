@@ -325,7 +325,9 @@
             showCardinal: true
           },
           data: data,
-          maxVelocity: 35
+          maxVelocity: 35,
+          velocity_scale: 0.001,
+          min_velocity: 0.001,
         });
         velocityLayer.addTo(map)
         layerControl.addOverlay(velocityLayer, "ERA5 Wind");
