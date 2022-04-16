@@ -118,9 +118,9 @@
                 text-align: left;
             }
             h7 {
-            position: absolute;
-            bottom: 20%;
-            right: 400px;
+                position: absolute;
+                bottom: 20%;
+                right: 400px;
             }
 
         </style>
@@ -129,7 +129,7 @@
 
     <body>
 
-        
+
         <loaddiv class="site-wrapper">
             <div class="site-wrapper-inner">
               <div class="cover-container">
@@ -141,6 +141,21 @@
         </loaddiv>
 
 
+        <div id="welcomeDiv"  style="display:none;" class="answer_list"> 
+            <div style="position: relative; left: 0; top: 0;">
+                <img src="PolarisCOMETsplash.png" style="position: relative; top: -35px; left: 0px; width: 100%; height: 100%; "/>
+                <div class="site-wrapper-inner">
+                    <div class="cover-container">
+                        <h7 class="progress" style = "left: 220px;top: 665px;width: 70%;">
+                            <div class="cometprogress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </h7>
+                </div>
+            </div>
+           </div>
+        </div>
+
+
+
 
         
         <div id="container">
@@ -149,11 +164,11 @@
                 <div class="panel-info" id="features" > 
                   <div class="panel-heading" style="background-color:#10244C;">
                     <h5 class="panel-title" style="color:whitesmoke; font-family:'Oxygen'; position:relative; left:0px; top:0px;">Run Model
-                    <button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn"><i class="fa fa-chevron-left"></i></button></h3>
+                    <button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn" data-toggle="modal" data-target="#confirmpolarisCOMET"><i class="fa fa-chevron-left"></i></button></h3>
                   </div>
                   <div class="sidenav">
                     <h6 href="#" style="color:#7BE2EC; font-family:'Oxygen'">
-                        <a href="#"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">cloud</i>    Metrology <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
+                            <a href="#" type="button" data-toggle="modal" data-target="#exampleModal"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">cloud</i>    Metrology <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
                         <a href="#"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">domain</i>   Domain <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
                         <a href="#"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">all_out</i>  Source Term <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
                         <a href="#"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">output</i>   Outputs <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
@@ -167,6 +182,14 @@
             </div>
             <div id="map"></div>
         </div>
+
+        <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <!-- Button trigger modal -->
+        
+        <!-- Modal -->
+
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <div class="container-fluid" style="background-color:#6F2DBD;">
             <div class="navbar-header">
@@ -338,6 +361,30 @@
     </script>
 
     </script>
+    <!--Confirm PolarisCOMET Modal -->
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h10 class="modal-title" style="color:black; font-family:'Assistant'; font-size: large;" >Launch PolarisCOMET?</h10>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="PolarisCOMETlogo.png" alt="PolarisCOMETLogo" style="width:456px;height:95px;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #34495e;" name="answer" value="Show Div" onclick="showDiv()" data-dismiss="modal">Launch</button>
+            </div>
+            </div>
+        </div>
+        
+
+        </div>
         <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -377,7 +424,7 @@
                     </div>
                     <div id="disclaimer" class="tab-pane fade text-danger">
                         <p>The data provided on this site is for informational and planning purposes only.</p>
-                        <p>Absolutely no accuracy or completeness guarantee is implied or intended. All information on this map is subject to such variations and corrections as might result from a complete title search and/or accurate field survey.</p>
+                        <p>Absolutely no accuracy or completeness guarantee is implied or intended. All information generated are subject to such variations and corrections as might result from true deposition and/or accurate field survey.</p>
                     </div>
                     <div class="tab-pane fade" id="contact">
                         <form id="contact-form">
@@ -523,8 +570,23 @@
                 $(".progress-bar").animate({
                         width: "100%",
                 }, 2500);
+
             </script>
+
             <script>$('loaddiv').delay(2650).hide(1000); </script>
+            <script>
+                function showDiv(){
+                    document.getElementById('welcomeDiv').style.display = "inline"
+                    $(".cometprogress-bar").animate({
+                    width: "0%",
+                    }, 20);
+                    $(".cometprogress-bar").animate({
+                    width: "100%",
+                    }, 7200);
+                setTimeout(function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "none";
+}, 8000)};
+           </script>
             
 
 

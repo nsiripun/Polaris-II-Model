@@ -190,6 +190,12 @@ body {
 } 
 
 
+.cometprogress-bar {
+  background-color: #00C2CB;
+  height: 100%;
+} 
+
+
 body {
   margin: 0px;
 }
