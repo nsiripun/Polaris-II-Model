@@ -117,6 +117,12 @@
                 color: #ffffff;
                 text-align: left;
             }
+            h17 {
+                font-family: 'Josefin Sans', sans-serif;
+                font-family: 'Oxygen', sans-serif;
+                color: #ffffff;
+                text-align: left;
+            }
             h7 {
                 position: absolute;
                 bottom: 20%;
@@ -126,6 +132,7 @@
         </style>
 
     </head>
+    
 
     <body>
 
@@ -298,6 +305,7 @@
                 cutPolygon: true, // adds button to cut a hole in a polygon
                 editMode: true, // adds button to toggle edit mode for all layers
                 removalMode: true, // adds a button to remove layers
+
             };
          map.pm.addControls(options);
          var credctrl = L.controlCredits({
@@ -338,7 +346,7 @@
       var layerControl = mapStuff.layerControl;
       
 
-      $.getJSON("https://api.jsonbin.io/b/625c241cbc312b30ebe8694a", function(data) {
+      $.getJSON("fukuCOMETjson.json", function(data) {
         var velocityLayer = L.velocityLayer({
           displayValues: true,
           displayOptions: {
@@ -382,6 +390,8 @@
             </div>
             </div>
         </div>
+
+            
         
 
         </div>
@@ -395,7 +405,7 @@
                 <div class="modal-body">
                     <ul class="nav nav-tabs nav-justified" id="aboutTabs">
                     <li class="active" ><a href="#about" data-toggle="tab"><i class="fa fa-question-circle"></i>&nbsp;About the project</a></li>
-                    <li><a href="#contact" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;Contact us</a></li>
+                    <li><a href="#contact" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;Contact</a></li>
                     <li><a href="#disclaimer" data-toggle="tab"><i class="fa fa-exclamation-circle"></i>&nbsp;Disclaimer</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i>&nbsp;Metadata <b class="caret"></b></a>
@@ -409,15 +419,15 @@
                     </ul>
                     <div class="tab-content" id="aboutTabsContent">
                     <div class="tab-pane fade active in" id="about">
-                        <p>A real-time atmospheric dispersion model based on Gaussian solutions. Metrology datasets downloaded from: <a href="https://developers.google.com/earth-engine/datasets/catalog/NOAA_NWS_RTMA?hl=en">RTMA</a>, <a href="https://developers.google.com/earth-engine/datasets/catalog/JAXA_ALOS_AW3D30_V3_2?hl=en" target="_blank">ALOS30</a>, and <a href="https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003" target="_blank">SRTM90</a> . Open source, MIT licensed, and available on <a href="https://github.com/bmcbride/bootleaf" target="_blank">GitHub</a>.</p>
+                        <p>A real-time atmospheric dispersion model based on Gaussian solutions. Metrology datasets downloaded from: <a href="https://developers.google.com/earth-engine/datasets/catalog/NOAA_NWS_RTMA?hl=en">RTMA</a>, <a href="https://www.ecmwf.int/en/forecasts/datasets/catalogue-ecmwf-real-time-products" target="_blank">ECMWF Integrated Forecast System (IFS)</a>, and <a href="https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003" target="_blank">SRTM90</a> . Open source, available on <a href="https://github.com/nsiripun/Polaris-II-Model" target="_blank">GitHub</a>.</p>
                         <div class="panel panel-primary">
                         <div class="panel-heading" style="background-color: #652fbd;">Features </div>
                         <ul class="list-group">
-                            <li class="list-group-item">Mobile-based atmopheric dispersion model with server-based computation solutions</li>
-                            <li class="list-group-item">GeoJSON, metrology & signal processing Solutions with build-in model formatter</li>
+                            <li class="list-group-item">Mobile-based atmopheric dispersion model with server side computation solutions</li>
+                            <li class="list-group-item">GeoJSON, metrology & signal processing solutions with built-in model formatter PolarisCOMET</li>
                             <li class="list-group-item">Logical multiple layer marker clustering via the <a href="https://github.com/Leaflet/Leaflet.markercluster" target="_blank">leaflet marker cluster plugin</a></li>
-                            <li class="list-group-item">Gaussian dispersion model with Euler based plume centerline using <a href="http://twitter.github.io/typeahead.js/" target="_blank">typeahead.js</a></li>
-                            <li class="list-group-item">Timestep accuracy evaluation with NMSE and FB from <a href="http://listjs.com/" target="_blank">Fukushima datasets</a></li>
+                            <li class="list-group-item">Gaussian dispersion model with Lagrange particle path based plume centerline using <a href="https://scipy.org" target="_blank">SciPython</a></li>
+                            <li class="list-group-item">Timestep accuracy evaluation with NMSE and FB from <a href="https://ramap.jmc.or.jp/map/eng/#lat=37.48876249153977&lon=140.97505230945828&z=12&b=std&t=air&s=28,0,13,21&c=20110429_cs137,20111228survey,carSurveyDr,landuse" target="_blank">Fukushima datasets</a></li>
                             <li class="list-group-item">Inbuilt Pasquill-Gifford Stability classes and <a href="https://github.com/ismyrnow/Leaflet.groupedlayercontrol" target="_blank">grouped layer control plugin</a></li>
                         </ul>
                         </div>
@@ -554,6 +564,24 @@
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
+            <div class="modal fade" id="warnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h10 class="modal-title" style="color:black; font-family:'Assistant'; font-size: large;" >Development Notice...</h10>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="false">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h17  style="color:rgb(41, 41, 41);">It looks like you have landed on the Polaris II webinterface! However it is still under delvelopment, so function is very limited. Feel free to explore though.            </h17>
+                        <h17  style="color:rgb(41, 41, 41);">Cheers, Pun Siripun.</h17>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
             
             <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -587,6 +615,13 @@
    document.getElementById('welcomeDiv').style.display = "none";
 }, 8000)};
            </script>
+           <script type="text/javascript">
+                setTimeout(function() {
+                    $('#warnModal').modal('show');
+                }, 4000);
+                    
+            </script>
+           
             
 
 
