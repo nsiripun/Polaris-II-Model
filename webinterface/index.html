@@ -1,487 +1,622 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>IPyWidget export</title>
-</head>
-<body>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <!-- Load ipyLeaflet interactive: http://leafletjs.com/ -->
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="theme-color" content="#9966ff">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Polaris II Model Webinterface</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css">
+        <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css">
+        <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.css">
+        <link rel="stylesheet" href="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.css">
+        <link rel="stylesheet" href="assets/css/app.css">
+
+        <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon-76.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicon-120.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="assets/img/favicon-152.png">
+        <link rel="icon" sizes="196x196" href="assets/img/favicon-196.png">
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+        <link href="startup.css" rel="stylesheet" type="text/css">
+        <title>Polaris II Model Webinterface</title>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Load Leaflet: http://leafletjs.com/ -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+
+        <!-- Esri Leaflet Plugin: https://esri.github.io/esri-leaflet/ -->
+        <script src="https://unpkg.com/esri-leaflet@2.1.3/dist/esri-leaflet.js" integrity="sha512-pijLQd2FbV/7+Jwa86Mk3ACxnasfIMzJRrIlVQsuPKPCfUBCDMDUoLiBQRg7dAQY6D1rkmCcR8286hVTn/wlIg==" crossorigin=""></script>
+
+        <!-- ESRI Renderer Plugin: https://github.com/Esri/esri-leaflet-renderers -->
+        <!-- Renders feature layer using default symbology as defined by ArcGIS REST service -->
+        <!-- Currently doesn't work with ESRI cluster plugin -->
+        <script src="https://unpkg.com/esri-leaflet-renderers@2.0.6/dist/esri-leaflet-renderers.js" integrity="sha512-mhpdD3igvv7A/84hueuHzV0NIKFHmp2IvWnY5tIdtAHkHF36yySdstEVI11JZCmSY4TCvOkgEoW+zcV/rUfo0A==" crossorigin=""></script>
+
+        <!-- Load Leaflet Basemap Providers: https://github.com/leaflet-extras/leaflet-providers -->
+        <!-- Modified to include USGS TNM web services -->
+        <script src="JS/leaflet-providers.js"></script>
+
+        <!-- 2.5D OSM Buildings Classic: https://github.com/kekscom/osmbuildings -->
+        <script src="https://cdn.osmbuildings.org/OSMBuildings-Leaflet.js"></script>
+
+        <!-- Load Font Awesome icons -->
+        <script src="https://use.fontawesome.com/a64989e3a8.js"></script>
+
+        <!-- Grouped Layer Plugin: https://github.com/ismyrnow/leaflet-groupedlayercontrol  -->
+        <link rel="stylesheet" href="CSS/leaflet.groupedlayercontrol.min.css">
+        <script src="JS/leaflet.groupedlayercontrol.min.js" type="text/javascript"></script>
+
+        <!-- Overview mini map Plugin: https://github.com/Norkart/Leaflet-MiniMap -->
+        <link rel="stylesheet" href="CSS/Control.MiniMap.css">
+        <script src="JS/Control.MiniMap.min.js" type="text/javascript"></script>
+
+        <!-- Leaflet Drawing Plugin: https://github.com/codeofsumit/leaflet.pm -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css">
+        <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
+
+        <!-- Leaflet WMS Plugin: https://github.com/heigeo/leaflet.wms -->
+        <script src="JS/leaflet.wms.js"></script>
+
+        <!-- Logo Credit Plugin: https://github.com/gregallensworth/L.Control.Credits -->
+        <link rel="stylesheet" href="CSS/leaflet-control-credits.css" />
+        <script type="text/javascript" src="JS/leaflet-control-credits.js"></script>
+        <!-- Load Lovelo/Josefin Style Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@700&family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+        <!-- Load Adobe Assistant Style Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Assistant&family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+        <!-- Load Oxygen Style Fonts -->
+
+        <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
+        <!-- Bootstrap Bar Animator and Jquery -->
+        <link rel=”stylesheet” href=”https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css”>
+        <script src=”https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js”></script>
+        <script src=”https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js”></script>
+        <script src=”https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js”></script>
+        <script src="jquery.js"></script> 
+
+        <!--Google Icons -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        
+
+        <style>
+            body {
+                padding: 10;
+                margin: 0;
+            }
+
+            html,
+            body,
+            #map {
+                height: 100%;
+            }
+            h5 {
+                font-family: 'Josefin Sans', sans-serif;
+                font-family: 'League Spartan', sans-serif;
+                color: #ffffff;
+                text-align: left;
+            }
+            h6 {
+                font-family: 'Josefin Sans', sans-serif;
+                font-family: 'Oxygen', sans-serif;
+                color: #ffffff;
+                text-align: left;
+            }
+            h17 {
+                font-family: 'Josefin Sans', sans-serif;
+                font-family: 'Oxygen', sans-serif;
+                color: #ffffff;
+                text-align: left;
+            }
+            h7 {
+                position: absolute;
+                bottom: 20%;
+                right: 400px;
+            }
+
+        </style>
+
+    </head>
+    
+
+    <body>
 
 
-<!-- Load require.js. Delete this if your page already loads require.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js" crossorigin="anonymous"></script>
+        <loaddiv class="site-wrapper">
+            <div class="site-wrapper-inner">
+              <div class="cover-container">
+                    <h7 class="progress" style = "left: 220px;top: 710px;width: 70%;">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </h7>
+              </div>
+            </div>
+        </loaddiv>
 
-<script type="application/vnd.jupyter.widget-state+json">
-{
-  "version_major": 2,
-  "version_minor": 0,
-  "state": {
-    "cefd8418798c4f5bba475236d1af3157": {
-      "model_name": "LeafletMapStyleModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {}
-    },
-    "4d60101758b94b1183eeaea28d65d37f": {
-      "model_name": "LeafletMapStyleModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {
-        "cursor": "move"
+
+        <div id="welcomeDiv"  style="display:none;" class="answer_list"> 
+            <div style="position: relative; left: 0; top: 0;">
+                <img src="PolarisCOMETsplash.png" style="position: relative; top: -35px; left: 0px; width: 100%; height: 100%; "/>
+                <div class="site-wrapper-inner">
+                    <div class="cover-container">
+                        <h7 class="progress" style = "left: 220px;top: 665px;width: 70%;">
+                            <div class="cometprogress-bar" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </h7>
+                </div>
+            </div>
+           </div>
+        </div>
+
+
+
+
+        
+        <div id="container">
+            <div id="sidebar">
+              <div class="sidebar-wrapper">
+                <div class="panel-info" id="features" > 
+                  <div class="panel-heading" style="background-color:#10244C;">
+                    <h5 class="panel-title" style="color:whitesmoke; font-family:'Oxygen'; position:relative; left:0px; top:0px;">Run Model
+                    <button type="button" class="btn btn-xs btn-default pull-right" id="sidebar-hide-btn" data-toggle="modal" data-target="#confirmpolarisCOMET"><i class="fa fa-chevron-left"></i></button></h3>
+                  </div>
+                  <div class="sidenav">
+                    <h6 href="#" style="color:#7BE2EC; font-family:'Oxygen'">
+                            <a href="#" type="button" data-toggle="modal" data-target="#exampleModal"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">cloud</i>    Metrology <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
+                        <a href="#"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">domain</i>   Domain <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
+                        <a href="#"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">all_out</i>  Source Term <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
+                        <a href="#"><i class="material-icons" style="color:#FF914D; position:relative; left:0px; top:6px;">output</i>   Outputs <div align="right"><i class="material-icons" style="color:#0c7db1; position:relative; left:-10px; top:-18px;">question_mark</i></div></a>
+                    </h6>
+                  </div>
+                  <div class="sidebar-table">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
+        <!-- Modal -->
+        <!-- Button trigger modal -->
+        
+        <!-- Modal -->
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid" style="background-color:#6F2DBD;">
+            <div class="navbar-header">
+                <div class="navbar-icon-container">
+                <a href="#" class="navbar-icon pull-right visible-xs" id="nav-btn"><i class="fa fa-bars fa-lg white"></i></a>
+                <a href="#" class="navbar-icon pull-right visible-xs" id="sidebar-toggle-btn"><i class="fa fa-search fa-lg white"></i></a>
+                </div>
+                
+                <a class="navbar-brand" style="color:white; font-family:'Josefin Sans'; position:relative; left:0px; top:4px;" href="#">POLARIS II </a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <form class="navbar-form navbar-right" role="search">
+                <div class="form-group has-feedback">
+                    <input id="searchbox" type="text" placeholder="Search" class="form-control">
+                    <span id="searchicon" class="fa fa-search form-control-feedback"></span>
+                </div>
+              </form>
+                <ul class="nav navbar-nav">
+                <li style="font-family:'Oxygen'; position:relative; left:0px; top:0px;"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;About</a></li>
+                <li class="dropdown" style="font-family:'Oxygen'; position:relative; left:0px; top:0px;">
+                    <a id="toolsDrop" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe white"></i>&nbsp;&nbsp;Weather&nbsp; <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="full-extent-btn"><i class="fa fa-arrows-alt"></i>&nbsp;&nbsp;Zoom To Full Extent</a></li>
+                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o"></i>&nbsp;&nbsp;Show Legend</a></li>
+                    <li class="divider hidden-xs"></li>
+                    <li><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="login-btn"><i class="fa fa-user"></i>&nbsp;&nbsp;Web Login</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" style="font-family:'Oxygen'; position:relative; left:0px; top:0px;">
+                    <a class="dropdown-toggle" id="downloadDrop" href="#" role="button" data-toggle="dropdown"><i class="fa fa-cloud-download white"></i>&nbsp;&nbsp;Download&nbsp; <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="data/boroughs.geojson" download="boroughs.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Weather</a></li>
+                        <li><a href="data/subways.geojson" download="subways.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Emission</a></li>
+                        <li><a href="data/DOITT_THEATER_01_13SEPT2010.geojson" download="theaters.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Plots</a></li>
+                        <li><a href="data/DOITT_MUSEUM_01_13SEPT2010.geojson" download="museums.geojson" target="_blank" data-toggle="collapse" data-target=".navbar-collapse.in"><i class="fa fa-download"></i>&nbsp;&nbsp;Additional Info.</a></li>
+                    </ul>
+                </li>
+                <li class="hidden-xs" style="font-family:'Oxygen'; position:relative; left:0px; top:0px;"><a href="#" data-toggle="collapse" data-target=".navbar-collapse.in" id="list-btn"><i class="fa fa-list white"></i>&nbsp; Atmospheric Model&nbsp;</a></li>
+                </ul>
+            </div><!--/.navbar-collapse -->
+            </div>
+        </div>
+        
+
+    <div id="map"></div>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://npmcdn.com/leaflet@2.1.3/dist/leaflet.css"
+    />
+    <script src="https://npmcdn.com/leaflet@2.1.3/dist/leaflet.js"></script>
+
+    <!--leaflet-velocity (GITHUB HOSTED)-->
+    <link rel="stylesheet" href="https://polarismodel.org/webinterface/dist/leaflet-velocity.css" />
+    <script src="https://polarismodel.org/webinterface/dist/leaflet-velocity.js"></script>
+
+    <!--demo-->
+    <script>
+      function initDemoMap() {
+        var Stadiadark =  L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=53abb454-33d4-4f27-a669-9e083dff5563', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            });
+
+        var Esri_DarkGreyCanvas = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 20
+        
+            });
+        var Stadiasmooth = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png?api_key=53abb454-33d4-4f27-a669-9e083dff5563', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+            });
+        var Esri_WorldImagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+            });
+        var OSM = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            });
+                
+        var map = L.map("map", {
+          layers: [Stadiadark]
+        });
+
+        var baseLayers = {
+          "Stadia Alidade Dark" : Stadiadark,
+          Satellite: Esri_WorldImagery,
+          "Carto Voyager": Esri_DarkGreyCanvas,
+          'Stadia Alidade Smooth' : Stadiasmooth,
+          'OSM Topo' : OSM,
+        };
+
+
+        
+        var layerControl = L.control.layers(baseLayers);
+        layerControl.addTo(map);
+        map.setView([37.6670, 140.5775], 9);
+        var options = {
+                position: 'topleft', // toolbar position, options are 'topleft', 'topright', 'bottomleft', 'bottomright'
+                drawMarker: true, // adds button to draw markers
+                drawPolyline: true, // adds button to draw a polyline
+                drawRectangle: true, // adds button to draw a rectangle
+                drawPolygon: true, // adds button to draw a polygon
+                drawCircle: true, // adds button to draw a cricle
+                cutPolygon: true, // adds button to cut a hole in a polygon
+                editMode: true, // adds button to toggle edit mode for all layers
+                removalMode: true, // adds a button to remove layers
+
+            };
+         map.pm.addControls(options);
+         var credctrl = L.controlCredits({
+                image: "Images/polarislove.png",
+                link: "http://polarismodel.org/",
+                text: "Polaris II - Modeling for All"
+            }).addTo(map);
+
+         var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+             subdomains: 'abcd',
+         });
+         L.control.scale({
+                position: 'bottomleft'
+            }).addTo(map);
+
+         var miniMap = new L.Control.MiniMap(CartoDB_Positron, {
+             toggleDisplay: true,
+             minimized: false,
+             position: 'bottomleft'
+         }).addTo(map);
+         
+
+
+
+        return {
+          map: map,
+          layerControl: layerControl,
+          L:L,
+        };
       }
-    },
-    "9a47f4ab4daa4113990ed99f2801d2ea": {
-      "model_name": "LeafletTileLayerModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {
-        "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>",
-        "base": true,
-        "max_zoom": 20,
-        "min_zoom": 1,
-        "name": "CartoDB.DarkMatter",
-        "options": [
-          "attribution",
-          "bounds",
-          "detect_retina",
-          "max_native_zoom",
-          "max_zoom",
-          "min_native_zoom",
-          "min_zoom",
-          "no_wrap",
-          "tile_size",
-          "tms"
-        ],
-        "url": "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
-      }
-    },
-    "9e970e6b0b334a5280824c879bbb59e2": {
-      "model_name": "LayoutModel",
-      "model_module": "@jupyter-widgets/base",
-      "model_module_version": "1.2.0",
-      "state": {}
-    },
-    "c6aceb19daad4564a0bac401862c6914": {
-      "model_name": "LeafletMapStyleModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {}
-    },
-    "212bccbdeec2404f8f8181468ec35581": {
-      "model_name": "LeafletMapModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {
-        "_dom_classes": [],
-        "center": [
-          37.396113,
-          140.47733
-        ],
-        "controls": [
-          "IPY_MODEL_0a42e523ef5f404b89b819e14a2dd1d3",
-          "IPY_MODEL_63cfcc01efa0465699ffe0f63aaaf35a"
-        ],
-        "crs": {
-          "name": "EPSG3857",
-          "custom": false
-        },
-        "default_style": "IPY_MODEL_cefd8418798c4f5bba475236d1af3157",
-        "dragging_style": "IPY_MODEL_4d60101758b94b1183eeaea28d65d37f",
-        "interpolation": "linear",
-        "layers": [
-          "IPY_MODEL_9a47f4ab4daa4113990ed99f2801d2ea",
-          "IPY_MODEL_098c9b0b438742e597aa14c349556f94"
-        ],
-        "layout": "IPY_MODEL_9e970e6b0b334a5280824c879bbb59e2",
-        "options": [
-          "bounce_at_zoom_limits",
-          "box_zoom",
-          "center",
-          "close_popup_on_click",
-          "double_click_zoom",
-          "dragging",
-          "fullscreen",
-          "inertia",
-          "inertia_deceleration",
-          "inertia_max_speed",
-          "interpolation",
-          "keyboard",
-          "keyboard_pan_offset",
-          "keyboard_zoom_offset",
-          "max_zoom",
-          "min_zoom",
-          "prefer_canvas",
-          "scroll_wheel_zoom",
-          "tap",
-          "tap_tolerance",
-          "touch_zoom",
-          "world_copy_jump",
-          "zoom",
-          "zoom_animation_threshold",
-          "zoom_delta",
-          "zoom_snap",
-          "zoom_start"
-        ],
-        "style": "IPY_MODEL_c6aceb19daad4564a0bac401862c6914",
-        "zoom": 7.0
-      }
-    },
-    "0a42e523ef5f404b89b819e14a2dd1d3": {
-      "model_name": "LeafletZoomControlModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {
-        "options": [
-          "position",
-          "zoom_in_text",
-          "zoom_in_title",
-          "zoom_out_text",
-          "zoom_out_title"
-        ]
-      }
-    },
-    "63cfcc01efa0465699ffe0f63aaaf35a": {
-      "model_name": "LeafletAttributionControlModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {
-        "options": [
-          "position",
-          "prefix"
-        ],
-        "position": "bottomright"
-      }
-    },
-    "098c9b0b438742e597aa14c349556f94": {
-      "model_name": "LeafletVelocityModel",
-      "model_module": "jupyter-leaflet",
-      "model_module_version": "^0.16.0",
-      "state": {
-        "color_scale": [
-          "rgb(36,104, 180)",
-          "rgb(60,157, 194)",
-          "rgb(128,205,193)",
-          "rgb(151,218,168)",
-          "rgb(198,231,181)",
-          "rgb(238,247,217)",
-          "rgb(255,238,159)",
-          "rgb(252,217,125)",
-          "rgb(255,182,100)",
-          "rgb(252,150,75)",
-          "rgb(250,112,52)",
-          "rgb(245,64,32)",
-          "rgb(237,45,28)",
-          "rgb(220,24,32)",
-          "rgb(180,0,35)"
-        ],
-        "data": [
-          {
-            "header": {
-              "parameterUnit": "",
-              "parameterNumber": 2,
-              "dx": 2.204687854776773,
-              "dy": 1.7966305682390427,
-              "parameterNumberName": "Eastward current",
-              "la1": 44.404312841195214,
-              "la2": 26.438007158804787,
-              "parameterCategory": 2,
-              "lo2": 152.05582827388386,
-              "nx": 11,
-              "ny": 11,
-              "refTime": "2017-02-01 23:00:00",
-              "lo1": 130.00894972611613
-            },
-            "data": [
-              20.49687775070602,
-              14.8,
-              15.068442890109466,
-              26.302473018495032,
-              32.25443617561893,
-              30.63480184941787,
-              16.49480172406703,
-              46.45115989681386,
-              42.48097529024858,
-              51.89936858374337,
-              48.199698731824505,
-              16.61773159165019,
-              13.850000000000012,
-              19.801479438925902,
-              22.280935604660577,
-              30.699151720592788,
-              17.63609817261276,
-              7.212566884330647,
-              36.320205787563566,
-              44.64351299490023,
-              26.576722545053702,
-              25.185056433583956,
-              -23.476453821975372,
-              12.94615108871073,
-              25.62635741918429,
-              22.92580586298064,
-              29.657988604293088,
-              10.781178942679249,
-              36.025717632529265,
-              33.23546318330038,
-              31.76528764425813,
-              21.28702461550674,
-              18.77423525338599,
-              2.5357095704441948,
-              -9.030970087718508,
-              -5.6241092976240425,
-              8.869596616706517,
-              18.446341100608542,
-              1.4527695991665495,
-              15.480768816367302,
-              21.209257346955944,
-              23.70295182443761,
-              14.761328152286417,
-              -1.4579103012522188,
-              11.509436805418419,
-              -11.497079796628164,
-              -19.161466982422265,
-              -6.713443347838239,
-              -2.542346798541462,
-              4.590510977845909,
-              14.613344205498842,
-              -2.686381505978694,
-              -4.356118060050048,
-              -6.859103017843748,
-              -32.46312193897493,
-              22.40380592137423,
-              -7.880466884168427,
-              -6.095202647831141,
-              10.861957270738799,
-              -5.755336383148386,
-              -24.058334596187503,
-              -25.9280001112533,
-              -27.24957293245796,
-              -17.799999999999997,
-              -9.840253602666872,
-              -13.473833851955066,
-              -8.196675541373065,
-              -6.0915855635556815,
-              -4.740962520052386,
-              -13.407189618366214,
-              -36.691511771362414,
-              -38.157866707537266,
-              -38.484679318117834,
-              -30.931611414561996,
-              -36.836718573060416,
-              -4.330056454280184,
-              26.24210382165161,
-              -9.290478544401624,
-              -1.5704773516125436,
-              -18.299370733372285,
-              -18.045007245378926,
-              -1.5648450916640206,
-              19.457157176333844,
-              7.5518446925980545,
-              15.754670300120758,
-              20.22851677034302,
-              22.390264502768535,
-              24.94568152856113,
-              -1.9625983591103937,
-              -14.0838604171303,
-              -16.071263690779954,
-              -10.903551152910046,
-              -13.1285659172396,
-              10.431998923921938,
-              12.344170317131221,
-              14.892539958084512,
-              12.928890981838823,
-              13.227977893497618,
-              11.864081411149002,
-              -15.19944089823275,
-              -24.617684382679226,
-              -21.256312539292434,
-              -13.948491130197901,
-              -6.13945309551007,
-              -4.326372811226469,
-              -4.402978499913953,
-              -0.6281909406450206,
-              5.47023579884983,
-              4.7,
-              5.351975815759156,
-              -7.39700412948524,
-              -21.395477810137116,
-              -15.35194998714384,
-              -21.939140022684242,
-              -3.2755801403744433,
-              12.877038120866876,
-              19.73950742100705,
-              9.110900804897923,
-              5.391926446648768,
-              7.947845481490629,
-              6.582862246223427
-            ]
+
+
+
+      // demo map
+      var mapStuff = initDemoMap();
+      var map = mapStuff.map;
+      var layerControl = mapStuff.layerControl;
+      
+
+      $.getJSON("https://api.jsonbin.io/v3/b/634f332f2b3499323be323b5?meta=false", function(data) {
+        var velocityLayer = L.velocityLayer({
+          displayValues: true,
+          displayOptions: {
+            velocityType: "Wind",
+            position: "bottomleft",
+            emptyString: "No wind data",
+            showCardinal: true
           },
-          {
-            "header": {
-              "parameterUnit": "",
-              "parameterNumber": 3,
-              "dx": 2.204687854776773,
-              "dy": 1.7966305682390427,
-              "parameterNumberName": "Northward current",
-              "la1": 44.404312841195214,
-              "la2": 26.438007158804787,
-              "parameterCategory": 2,
-              "lo2": 152.05582827388386,
-              "nx": 11,
-              "ny": 11,
-              "refTime": "2017-02-01 23:00:00",
-              "lo1": 130.00894972611613
-            },
-            "data": [
-              -0.3577743319643042,
-              2.718715894107124e-15,
-              -4.037577103599316,
-              -3.2295376002364136,
-              -16.43445609057159,
-              -10.548408204411864,
-              7.691652363680723,
-              -5.703485271360911,
-              -5.216007897740321,
-              9.151258963047228,
-              12.915070350615778,
-              -6.378949501906347,
-              -23.98890368482894,
-              -5.305790424601666,
-              -15.601279068748452,
-              -17.016817670646436,
-              -4.071614083623955,
-              4.683895701129232,
-              -7.059932828932169,
-              -7.0708378198184265,
-              14.131094039855313,
-              7.221698722405371,
-              -21.892147358006202,
-              -10.863110603702513,
-              -14.204921873217682,
-              -18.564951535970206,
-              -17.82031739188787,
-              5.493285046848517,
-              -7.002690130319206,
-              -12.757899003812694,
-              -10.321167612123237,
-              -0.7433592797632773,
-              -0.9839159773673463,
-              -5.4378467222199,
-              1.755442757464212,
-              -17.309228596571792,
-              -20.89546017337039,
-              -10.65,
-              2.8512208774027776,
-              -8.581130278360169,
-              -19.77795244181246,
-              -19.194271927020043,
-              -16.980965555012368,
-              -20.849088650430325,
-              -11.114533927343956,
-              4.64512175835731,
-              -17.86835703363746,
-              -12.626150577882656,
-              4.989636535454859,
-              -13.331811915950368,
-              -34.42688151912127,
-              -25.559212710964623,
-              -30.995390551611152,
-              -38.899906243982215,
-              -34.812436197072515,
-              -27.66639622786815,
-              -10.086537646166041,
-              -9.036509540849954,
-              -4.610627316173428,
-              -2.562440851377541,
-              -38.50138356550174,
-              -32.0184136120272,
-              -33.65042013108684,
-              -30.83050437472602,
-              -34.31704254499799,
-              -25.340595915051203,
-              -6.877827423645971,
-              -21.24388348023685,
-              -16.533701170139086,
-              -36.83595073480761,
-              -39.34682914711137,
-              -30.899631200547024,
-              -37.16422281955636,
-              -29.870309929736887,
-              -29.829786535762295,
-              -12.575397055470916,
-              3.6880871754417446,
-              -40.241483675630214,
-              -44.972587215859306,
-              -39.24312717868694,
-              -24.836821727310888,
-              -29.859023089161756,
-              -12.635625612348617,
-              -9.325751537483647,
-              14.185568854807793,
-              13.644306844686216,
-              12.411126278306224,
-              10.588813582059322,
-              -37.44860755329652,
-              -36.689710761340024,
-              -31.54163095626822,
-              -23.382740905545568,
-              -30.928963076002,
-              2.795245687107223,
-              13.237501999306991,
-              17.131907471056927,
-              16.548225825741163,
-              11.910524793187674,
-              5.7864991376158255,
-              -35.80763879929993,
-              -37.90790967113317,
-              -24.45259039921781,
-              -16.623164415681824,
-              -4.971631089293717,
-              1.836436303899587,
-              17.659382218223136,
-              17.989034886343724,
-              12.887067948334165,
-              8.63375993398884e-16,
-              10.065602558591767,
-              -24.194510325864798,
-              -22.155665850430456,
-              -15.897409587484193,
-              -8.42164681431456,
-              10.081199072728626,
-              20.607568736601156,
-              15.98473793266588,
-              20.46341825119426,
-              8.302838622659698,
-              -3.5386087947594578,
-              12.919594600731335
-            ]
-          }
-        ],
-        "display_options": {
-          "velocityType": "Global Wind",
-          "position": "bottomleft",
-          "emptyString": "No velocity data",
-          "angleConvention": "bearingCW",
-          "displayPosition": "bottomleft",
-          "displayEmptyString": "No velocity data",
-          "speedUnit": "kt"
-        },
-        "max_velocity": 35.0,
-        "options": [
-          "color_scale",
-          "display_values",
-          "max_velocity",
-          "min_velocity",
-          "velocity_scale"
-        ],
-        "velocity_scale": 0.01
-      }
-    }
-  }
-}
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "212bccbdeec2404f8f8181468ec35581"}
-</script>
+          data: data,
+          maxVelocity: 35,
+          velocityScale: 0.001
+        });
+        velocityLayer.addTo(map)
+        layerControl.addOverlay(velocityLayer, "80m Wind");
+        
+      });
+      
 
-</body>
+
+    </script>
+
+    </script>
+    <!--Confirm PolarisCOMET Modal -->
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h10 class="modal-title" style="color:black; font-family:'Assistant'; font-size: large;" >Launch PolarisCOMET?</h10>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="false">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="PolarisCOMETlogo.png" alt="PolarisCOMETLogo" style="width:456px;height:95px;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #34495e;" name="answer" value="Show Div" onclick="showDiv()" data-dismiss="modal">Launch</button>
+            </div>
+            </div>
+        </div>
+
+            
+        
+
+        </div>
+        <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h5 class="modal-title" style="color:black; font-family:'Assistant'; font-size: x-large;"; >Welcome to Polaris! Lets get you Modeling.</h5>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs nav-justified" id="aboutTabs">
+                    <li class="active" ><a href="#about" data-toggle="tab"><i class="fa fa-question-circle"></i>&nbsp;About the project</a></li>
+                    <li><a href="#contact" data-toggle="tab"><i class="fa fa-envelope"></i>&nbsp;Contact</a></li>
+                    <li><a href="#disclaimer" data-toggle="tab"><i class="fa fa-exclamation-circle"></i>&nbsp;Disclaimer</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i>&nbsp;Metadata <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        <li><a href="#boroughs-tab" data-toggle="tab">Real-Time Wind</a></li>
+                        <li><a href="#subway-lines-tab" data-toggle="tab">Forecasts</a></li>
+                        <li><a href="#theaters-tab" data-toggle="tab">Realanalysis</a></li>
+                        <li><a href="#museums-tab" data-toggle="tab">Topology</a></li>
+                        </ul>
+                    </li>
+                    </ul>
+                    <div class="tab-content" id="aboutTabsContent">
+                    <div class="tab-pane fade active in" id="about">
+                        <p>A real-time atmospheric dispersion model based on Gaussian solutions. Metrology datasets downloaded from: <a href="https://developers.google.com/earth-engine/datasets/catalog/NOAA_NWS_RTMA?hl=en">RTMA</a>, <a href="https://www.ecmwf.int/en/forecasts/datasets/catalogue-ecmwf-real-time-products" target="_blank">ECMWF Integrated Forecast System (IFS)</a>, and <a href="https://developers.google.com/earth-engine/datasets/catalog/USGS_SRTMGL1_003" target="_blank">SRTM90</a> . Open source, available on <a href="https://github.com/nsiripun/Polaris-II-Model" target="_blank">GitHub</a>.</p>
+                        <div class="panel panel-primary">
+                        <div class="panel-heading" style="background-color: #652fbd;">Features </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">Mobile-based atmopheric dispersion model with server side computation solutions</li>
+                            <li class="list-group-item">GeoJSON, metrology & signal processing solutions with built-in model formatter PolarisCOMET</li>
+                            <li class="list-group-item">Logical multiple layer marker clustering via the <a href="https://github.com/Leaflet/Leaflet.markercluster" target="_blank">leaflet marker cluster plugin</a></li>
+                            <li class="list-group-item">Gaussian dispersion model with Lagrange particle path based plume centerline using <a href="https://scipy.org" target="_blank">SciPython</a></li>
+                            <li class="list-group-item">Timestep accuracy evaluation with NMSE and FB from <a href="https://ramap.jmc.or.jp/map/eng/#lat=37.48876249153977&lon=140.97505230945828&z=12&b=std&t=air&s=28,0,13,21&c=20110429_cs137,20111228survey,carSurveyDr,landuse" target="_blank">Fukushima datasets</a></li>
+                            <li class="list-group-item">Inbuilt Pasquill-Gifford Stability classes and <a href="https://github.com/ismyrnow/Leaflet.groupedlayercontrol" target="_blank">grouped layer control plugin</a></li>
+                        </ul>
+                        </div>
+                    </div>
+                    <div id="disclaimer" class="tab-pane fade text-danger">
+                        <p>The data provided on this site is for informational and planning purposes only.</p>
+                        <p>Absolutely no accuracy or completeness guarantee is implied or intended. All information generated are subject to such variations and corrections as might result from true deposition and/or accurate field survey.</p>
+                    </div>
+                    <div class="tab-pane fade" id="contact">
+                        <form id="contact-form">
+                        <div class="well well-sm">
+                            <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                <label for="first-name">First Name:</label>
+                                <input type="text" class="form-control" id="first-name">
+                                </div>
+                                <div class="form-group">
+                                <label for="last-name">Last Name:</label>
+                                <input type="text" class="form-control" id="last-email">
+                                </div>
+                                <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control" id="email">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="message">Message:</label>
+                                <textarea class="form-control" rows="8" id="message"></textarea>
+                            </div>
+                            <div class="col-md-12">
+                                <p>
+                                <button type="submit" class="btn btn-primary pull-right" data-dismiss="modal">Submit</button>
+                                </p>
+                            </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="boroughs-tab">
+                        <p>3 Hourly Wind data provided by <a href="https://open-meteo.com/en/docs" target="_blank">Open-Meteo API</a></p>
+                    </div>
+                    <div class="tab-pane fade" id="subway-lines-tab">
+                        <p><a href="https://apps.ecmwf.int/webapps/opencharts?facets=%7B%22Parameters%22%3A%20%5B%22Temperature%22%2C%20%22Wind%22%5D%2C%20%22Component%22%3A%20%5B%22Surface%22%5D%2C%20%22Range%22%3A%20%5B%22Medium%20%2815%20days%29%22%5D%2C%20%22Product%20type%22%3A%20%5B%22High%20resolution%20forecast%20%28HRES%29%22%5D%2C%20%22Type%22%3A%20%5B%22Forecasts%22%5D%7D" target="_blank">Forecast Wind</a> courtesy of <a href="https://www.ecmwf.int/" target="_blank">ECMWF</a></p>
+                    </div>
+                    <div class="tab-pane fade" id="theaters-tab">
+                        <p>Realanalysis Weather from <a href="https://www.ecmwf.int/en/forecasts/datasets/reanalysis-datasets/era5" target="_blank">ECMWF ERA5</a></p>
+                    </div>
+                    <div class="tab-pane fade" id="museums-tab">
+                        <p>Topology (to be integrated) from <a href="https://land.copernicus.eu/imagery-in-situ/eu-dem" target="_blank">The European Copernicus program via Open-Meteo</a></p>
+                    </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div class="modal fade" id="legendModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Modeling with Polaris&nbsp;&nbsp;</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Details ...</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Login Redirect</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <p>You will be redirected to login on the main Polaris II site</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button onclick="location.href = 'https://naphatsiripun.wixsite.com/polariswebsite';" type="submit" class="btn btn-primary" data-dismiss="modal">Redirect</button>
+                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div class="modal fade" id="featureModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title text-primary" id="feature-title"></h4>
+                </div>
+                <div class="modal-body" id="feature-info"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+            <div class="modal fade" id="attributionModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">
+                    Developed by <a href=''>Pun Siripun</a>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div id="attribution"></div>
+                </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div class="modal fade" id="warnModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h10 class="modal-title" style="color:black; font-family:'Assistant'; font-size: large;" >Development Notice...</h10>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="false">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h17  style="color:rgb(41, 41, 41);">It looks like you have landed on the Polaris II webinterface! However it is still under development, so function is very limited. Feel free to explore. </h17>
+                        <h17  style="color:rgb(41, 41, 41);"> — Pun Siripun.</h17>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                    </div>
+                </div>
+            
+            <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.10.5/typeahead.bundle.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
+            <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js"></script>
+            <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-locatecontrol/v0.43.0/L.Control.Locate.min.js"></script>
+            <script src="assets/leaflet-groupedlayercontrol/leaflet.groupedlayercontrol.js"></script>
+            <script src="assets/js/app.js"></script>
+            <script>
+  
+                // Set the width to animate the progress bar
+                // Along with time duration in milliseconds
+                $(".progress-bar").animate({
+                        width: "100%",
+                }, 2500);
+
+            </script>
+
+            <script>$('loaddiv').delay(2650).hide(1000); </script>
+            <script>
+                function showDiv(){
+                    document.getElementById('welcomeDiv').style.display = "inline"
+                    $(".cometprogress-bar").animate({
+                    width: "0%",
+                    }, 20);
+                    $(".cometprogress-bar").animate({
+                    width: "100%",
+                    }, 2200);
+                setTimeout(function showDiv() {
+   document.getElementById('welcomeDiv').style.display = "none";
+}, 2400)};
+           </script>
+           <script type="text/javascript">
+                setTimeout(function() {
+                    $('#warnModal').modal('show');
+                }, 4000);
+                    
+            </script>
+           
+            
+
+
+    </body>
+    
+
 </html>
